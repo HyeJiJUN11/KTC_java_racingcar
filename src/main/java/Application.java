@@ -38,9 +38,6 @@ public class Application {
         }
     }
 
-    private static void CarRacePrint(List<Car> carList) {
-    }
-
     /**
      * 각 car마다 랜덤 숫자가 4이상이면 1칸 전진
      * @param carList
@@ -54,6 +51,30 @@ public class Application {
                 goTemp++;
                 car.setGo(goTemp);
             }
+        }
+    }
+
+    /**
+     * 한 시도 횟수의 결과 출력
+     * @param carList
+     */
+    private static void CarRacePrint(List<Car> carList) {
+        for(Car car : carList){
+            System.out.print(car.getName() + " : ");
+            printGo(car);
+            System.out.println();
+        }
+    }
+
+    /**
+     * 이동한 거리 "-"로 출력
+     * @param car
+     */
+    private static void printGo(Car car) {
+        if(car.getGo() == 0)
+            return;
+        for(int i=0; i<car.getGo(); i++){
+            System.out.print("-");
         }
     }
 }
