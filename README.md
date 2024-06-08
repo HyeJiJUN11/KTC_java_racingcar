@@ -1,4 +1,4 @@
-# java-baseball
+# java-carRace
 KTC step1 과제1 자동차경주 구현
 
 ## 프로젝트 소개
