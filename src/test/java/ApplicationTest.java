@@ -33,4 +33,27 @@ public class ApplicationTest {
         assertTrue(carList.get(0).getGo() == 0 || carList.get(0).getGo() == 1);
         assertTrue(carList.get(1).getGo() == 3 || carList.get(1).getGo() == 4);
     }
+
+    @Test
+    void CarRaceResultTry(){
+        Application app = new Application();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("aaa"));
+        carList.add(new Car("bbb"));
+        carList.get(0).setGo(3);
+        carList.get(1).setGo(1);
+        String expect = """
+                aaa : ---
+                bbb : -
+                """;
+        assertEquals(expect, app.CarRaceResult(carList));
+    }
+
+    @Test
+    void printGoTry(){
+        Application app = new Application();
+        Car car = new Car("qqq");
+        car.setGo(5);
+        assertEquals("-----", app.printGo(car));
+    }
 }
