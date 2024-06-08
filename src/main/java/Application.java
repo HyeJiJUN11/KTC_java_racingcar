@@ -27,13 +27,9 @@ public class Application {
 
         //go 큰 순서로 정렬
         Collections.sort(carList);
-        int maxGo = carList.get(0).getGo();
-        //가장 큰거 하나
-        System.out.print("최종우승자 : " + carList.get(0).getName());
-        //공동 우승자 있을 시
-        jointWinner(carList, maxGo);
+        System.out.println(Winner(carList));
     }
-ㅁ
+
     /**
      * 이름 리스트로 CarList 만듦
      * @param carNameList 이름 리스트
@@ -91,21 +87,38 @@ public class Application {
         if(car.getGo() == 0)
             return goString;
         for(int i=0; i<car.getGo(); i++){
-            goString += "-"
+            goString += "-";
         }
         return goString;
+    }
+
+
+    /**
+     * 우승자 String 생성
+     * @param carList 정렬된 carList
+     * @return 우승자 String
+     */
+    private static String Winner(List<Car> carList) {
+        String WinnerString = "\"최종우승자 : \" + carList.get(0).getName()";
+        int maxGo = carList.get(0).getGo();
+        //공동 우승자 있을 시
+        WinnerString += jointWinner(carList, maxGo);
+        return WinnerString;
     }
 
     /**
      * 우승한 Car 와 go가 같은 공동 우승자 출력
      * @param carList
      * @param maxGo 우승 자동차의 전진 횟수
+     * @return 공동 우승자 String
      */
-    private static void jointWinner(List<Car> carList, int maxGo) {
+    private static String jointWinner(List<Car> carList, int maxGo) {
+        String jointWinnerString = "";
         for(int i=1; i<carList.size(); i++){
             if(carList.get(i).getGo() == maxGo){
-                System.out.print(", " + carList.get(i).getName());
+                jointWinnerString += ", " + carList.get(i).getName();
             }
         }
+        return jointWinnerString;
     }
 }
