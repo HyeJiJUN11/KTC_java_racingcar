@@ -6,7 +6,7 @@ public class Application {
 
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String[] carNameList = input.nextLine().split(","); //,구분한 이름 리스트
-        List<Car> carList = MakeCarList(carNameList); //car 객체 리스트
+        List<Car> carList = makeCarList(carNameList); //car 객체 리스트
 
         System.out.println("시도할 회수는 몇회인가요?");
         int tryNum = input.nextInt();
@@ -14,12 +14,11 @@ public class Application {
 
         System.out.println("실행결과");
         for(int i=0; i<tryNum; i++){ //시도횟수 만큼 반복
-            CarRaceTry(carList);
-            System.out.println(CarRaceResult(carList));
+            carRaceTry(carList);
+            System.out.println(carRaceResult(carList));
         }
 
-        Collections.sort(carList); //go순으로 정렬
-        System.out.println(Winner(carList));
+        System.out.println(winner(carList));
     }
 
     /**
@@ -27,7 +26,7 @@ public class Application {
      * @param carNameList 이름 리스트
      * @return car객체 리스트
      */
-    private static List<Car> MakeCarList(String[] carNameList) {
+    public static List<Car> makeCarList(String[] carNameList) {
         List<Car> carList = new ArrayList<>();
         for (String name : carNameList) {
             //이름이 5이상이면 오류 발생
@@ -44,7 +43,7 @@ public class Application {
      * 각 car마다 랜덤 숫자가 4이상이면 1칸 전진
      * @param carList
      */
-    private static void CarRaceTry(List<Car> carList) {
+    public static void carRaceTry(List<Car> carList) {
         for(Car car : carList){
             Random random = new Random();
             if(random.nextInt(9) >= 4){
@@ -61,12 +60,12 @@ public class Application {
      * @param carList
      * @return 결과 String
      */
-    private static String CarRaceResult(List<Car> carList) {
-        String raceResult = "";
+    public static String carRaceResult(List<Car> carList) {
+        StringBuilder raceResult = new StringBuilder();
         for(Car car : carList){
-            raceResult = raceResult + car.getName() + " : " + printGo(car) + "\n";
+            raceResult.append(car.getName()).append(" : ").append(printGo(car)).append("\n");
         }
-        return raceResult;
+        return raceResult.toString();
     }
 
     /**
@@ -74,14 +73,14 @@ public class Application {
      * @param car
      * @return - string
      */
-    private static String printGo(Car car) {
-        String goString = "";
+    public static String printGo(Car car) {
+        StringBuilder goString = new StringBuilder();
         if(car.getGo() == 0)
-            return goString;
+            return goString.toString();
         for(int i=0; i<car.getGo(); i++){
-            goString += "-";
+            goString.append("-");
         }
-        return goString;
+        return goString.toString();
     }
 
 
@@ -90,7 +89,8 @@ public class Application {
      * @param carList 정렬된 carList
      * @return 우승자 String
      */
-    private static String Winner(List<Car> carList) {
+    public static String winner(List<Car> carList) {
+        Collections.sort(carList); //go순으로 정렬
         String WinnerString = "최종우승자 : " + carList.get(0).getName();
         int maxGo = carList.get(0).getGo();
         //공동 우승자 있을 시
@@ -104,13 +104,13 @@ public class Application {
      * @param maxGo 우승 자동차의 전진 횟수
      * @return 공동 우승자 String
      */
-    private static String jointWinner(List<Car> carList, int maxGo) {
-        String jointWinnerString = "";
+    public static String jointWinner(List<Car> carList, int maxGo) {
+        StringBuilder jointWinnerString = new StringBuilder();
         for(int i=1; i<carList.size(); i++){
             if(carList.get(i).getGo() == maxGo){
-                jointWinnerString += ", " + carList.get(i).getName();
+                jointWinnerString.append(", ").append(carList.get(i).getName());
             }
         }
-        return jointWinnerString;
+        return jointWinnerString.toString();
     }
 }
