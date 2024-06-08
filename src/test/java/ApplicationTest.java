@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ApplicationTest {
     @Test
     void MakeCarListTry(){
-        Application app = new Application();
+        CarPlay app = new CarPlay();
         String[] carNameList = {"aaa", "bbb", "ccc"};
         List<Car> resultCarList = app.makeCarList(carNameList);
 
@@ -36,7 +36,7 @@ public class ApplicationTest {
 
     @Test
     void carRaceResultTry(){
-        Application app = new Application();
+        CarResult app = new CarResult();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
@@ -51,7 +51,7 @@ public class ApplicationTest {
 
     @Test
     void printGoTry(){
-        Application app = new Application();
+        CarResult app = new CarResult();
         Car car = new Car("qqq");
         car.setGo(5);
         assertEquals("-----", app.printGo(car));
@@ -59,7 +59,7 @@ public class ApplicationTest {
 
     @Test
     void winnerOneTry(){
-        Application app = new Application();
+        CarWinner app = new CarWinner();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
@@ -73,7 +73,7 @@ public class ApplicationTest {
 
     @Test
     void winnerTwoTry(){
-        Application app = new Application();
+        CarWinner app = new CarWinner();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
@@ -87,7 +87,7 @@ public class ApplicationTest {
 
     @Test
     void winnerAllTry(){
-        Application app = new Application();
+        CarWinner app = new CarWinner();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
@@ -101,7 +101,7 @@ public class ApplicationTest {
 
     @Test
     void jointWinnerTry(){
-        Application app = new Application();
+        CarWinner app = new CarWinner();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
