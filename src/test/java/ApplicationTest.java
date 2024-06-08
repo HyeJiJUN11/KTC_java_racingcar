@@ -11,7 +11,7 @@ public class ApplicationTest {
     void MakeCarListTry(){
         Application app = new Application();
         String[] carNameList = {"aaa", "bbb", "ccc"};
-        List<Car> resultCarList = app.MakeCarList(carNameList);
+        List<Car> resultCarList = app.makeCarList(carNameList);
 
         List<Car> expectCarList = new ArrayList<>();
         expectCarList.add(new Car("aaa"));
@@ -25,7 +25,7 @@ public class ApplicationTest {
     }
 
     @Test
-    void CarRaceTry(){
+    void carRaceTry(){
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
         carList.add(new Car("bbb"));
@@ -35,7 +35,7 @@ public class ApplicationTest {
     }
 
     @Test
-    void CarRaceResultTry(){
+    void carRaceResultTry(){
         Application app = new Application();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("aaa"));
@@ -46,7 +46,7 @@ public class ApplicationTest {
                 aaa : ---
                 bbb : -
                 """;
-        assertEquals(expect, app.CarRaceResult(carList));
+        assertEquals(expect, app.carRaceResult(carList));
     }
 
     @Test
@@ -55,5 +55,63 @@ public class ApplicationTest {
         Car car = new Car("qqq");
         car.setGo(5);
         assertEquals("-----", app.printGo(car));
+    }
+
+    @Test
+    void winnerOneTry(){
+        Application app = new Application();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("aaa"));
+        carList.add(new Car("bbb"));
+        carList.add(new Car("ccc"));
+        carList.get(0).setGo(2);
+        carList.get(1).setGo(4);
+        carList.get(2).setGo(3);
+        String expect = "최종우승자 : bbb";
+        assertEquals(expect, app.winner(carList));
+    }
+
+    @Test
+    void winnerTwoTry(){
+        Application app = new Application();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("aaa"));
+        carList.add(new Car("bbb"));
+        carList.add(new Car("ccc"));
+        carList.get(0).setGo(2);
+        carList.get(1).setGo(3);
+        carList.get(2).setGo(3);
+        String expect = "최종우승자 : bbb, ccc";
+        assertEquals(expect, app.winner(carList));
+    }
+
+    @Test
+    void winnerAllTry(){
+        Application app = new Application();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("aaa"));
+        carList.add(new Car("bbb"));
+        carList.add(new Car("ccc"));
+        carList.get(0).setGo(3);
+        carList.get(1).setGo(3);
+        carList.get(2).setGo(3);
+        String expect = "최종우승자 : aaa, bbb, ccc";
+        assertEquals(expect, app.winner(carList));
+    }
+
+    @Test
+    void jointWinnerTry(){
+        Application app = new Application();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("aaa"));
+        carList.add(new Car("bbb"));
+        carList.add(new Car("ccc"));
+        carList.add(new Car("ddd"));
+        carList.get(0).setGo(5);
+        carList.get(1).setGo(5);
+        carList.get(2).setGo(1);
+        carList.get(3).setGo(5);
+        String expect = ", bbb, ddd";
+        assertEquals(expect, app.jointWinner(carList, 5));
     }
 }
