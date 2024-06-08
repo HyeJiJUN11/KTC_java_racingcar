@@ -3,8 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplicationTest {
     @Test
@@ -113,5 +112,26 @@ public class ApplicationTest {
         carList.get(3).setGo(5);
         String expect = ", bbb, ddd";
         assertEquals(expect, app.jointWinner(carList, 5));
+    }
+
+    @Test
+    void inputNameErrorTestFalse(){
+        InputError app = new InputError();
+        String input = "seiofjiegojis";
+        assertThrows(IllegalStateException.class, () -> app.inputNameErrorTest(input));
+    }
+
+    @Test
+    void inputTryNumErrorTestTrue(){
+        InputError app = new InputError();
+        String input = "5";
+        assertEquals(5, app.inputTryNumErrorTest(input));
+    }
+
+    @Test
+    void inputTryNumErrorTestFalse(){
+        InputError app = new InputError();
+        String input = "sdg";
+        assertThrows(IllegalStateException.class, () -> app.inputTryNumErrorTest(input));
     }
 }
