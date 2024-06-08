@@ -3,18 +3,18 @@ import java.util.List;
 import java.util.Random;
 
 public class CarPlay {
-
     /**
      * 이름 리스트로 CarList 만듦
-     * @param carNameList 이름 리스트
+     * @param carNames 이름 문자열
      * @return car객체 리스트
      */
-    public static List<Car> makeCarList(String[] carNameList) {
+    public static List<Car> makeCarList(String carNames) {
+        String[] carNameList = carNames.split(",");
         List<Car> carList = new ArrayList<>();
         for (String name : carNameList) {
             //이름이 5이상이면 오류 발생
             if (name.length() > 5) {
-                throw new IllegalStateException("잘못된 입력입니다.");
+                throw new IllegalStateException("자동차 이름은 5자 이하 입니다.");
             }
             //아니면 car 객체 생성후 넣음
             carList.add(new Car(name));

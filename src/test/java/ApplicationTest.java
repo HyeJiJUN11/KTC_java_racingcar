@@ -10,8 +10,8 @@ public class ApplicationTest {
     @Test
     void MakeCarListTry(){
         CarPlay app = new CarPlay();
-        String[] carNameList = {"aaa", "bbb", "ccc"};
-        List<Car> resultCarList = app.makeCarList(carNameList);
+        String carNames = "aaa,bbb,ccc";
+        List<Car> resultCarList = app.makeCarList(carNames);
 
         List<Car> expectCarList = new ArrayList<>();
         expectCarList.add(new Car("aaa"));
