@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
@@ -36,6 +33,14 @@ public class Application {
             CarRacePrint(carList);
             System.out.println();
         }
+
+        //go 큰 순서로 정렬
+        Collections.sort(carList);
+        int maxGo = carList.get(0).getGo();
+        //가장 큰거 하나
+        System.out.print("최종우승자 : " + carList.get(0).getName());
+        //공동 우승자 있을 시
+        jointWinner(carList, maxGo);
     }
 
     /**
@@ -75,6 +80,19 @@ public class Application {
             return;
         for(int i=0; i<car.getGo(); i++){
             System.out.print("-");
+        }
+    }
+
+    /**
+     * 우승한 Car 와 go가 같은 공동 우승자 출력
+     * @param carList
+     * @param maxGo 우승 자동차의 전진 횟수
+     */
+    private static void jointWinner(List<Car> carList, int maxGo) {
+        for(int i=1; i<carList.size(); i++){
+            if(carList.get(i).getGo() == maxGo){
+                System.out.print(", " + carList.get(i).getName());
+            }
         }
     }
 }
