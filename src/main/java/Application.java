@@ -3,30 +3,22 @@ import java.util.*;
 public class Application {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        //자동차 갯수, 이름 입력받음
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
-        //,구분한 이름 리스트
-        String[] carNameList = input.nextLine().split(",");
-        //car 객체 리스트
-        List<Car> carList = MakeCarList(carNameList);
 
-        //시도할 횟수 입력
+        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+        String[] carNameList = input.nextLine().split(","); //,구분한 이름 리스트
+        List<Car> carList = MakeCarList(carNameList); //car 객체 리스트
+
         System.out.println("시도할 회수는 몇회인가요?");
         int tryNum = input.nextInt();
-
         System.out.println();
-        System.out.println("실행결과");
 
-        //시도횟수 만큼 반복
-        for(int i=0; i<tryNum; i++){
-            //랜덤돌림
+        System.out.println("실행결과");
+        for(int i=0; i<tryNum; i++){ //시도횟수 만큼 반복
             CarRaceTry(carList);
-            //결과 프린트
-            CarRacePrint(carList);
+            System.out.println(CarRaceResult(carList));
         }
 
-        //go 큰 순서로 정렬
-        Collections.sort(carList);
+        Collections.sort(carList); //go순으로 정렬
         System.out.println(Winner(carList));
     }
 
@@ -65,22 +57,22 @@ public class Application {
     }
 
     /**
-     * 한 시도 횟수의 결과 출력
+     * 한 시도 횟수의 결과
      * @param carList
+     * @return 결과 String
      */
-    private static void CarRacePrint(List<Car> carList) {
+    private static String CarRaceResult(List<Car> carList) {
+        String raceResult = "";
         for(Car car : carList){
-            System.out.print(car.getName() + " : ");
-            System.out.println(printGo(car));
-            printGo(car);
-            System.out.println();
+            raceResult = raceResult + car.getName() + " : " + printGo(car) + "\n";
         }
-        System.out.println();
+        return raceResult;
     }
 
     /**
      * 이동한 거리 "-"로 출력
      * @param car
+     * @return - string
      */
     private static String printGo(Car car) {
         String goString = "";
@@ -99,7 +91,7 @@ public class Application {
      * @return 우승자 String
      */
     private static String Winner(List<Car> carList) {
-        String WinnerString = "\"최종우승자 : \" + carList.get(0).getName()";
+        String WinnerString = "최종우승자 : " + carList.get(0).getName();
         int maxGo = carList.get(0).getGo();
         //공동 우승자 있을 시
         WinnerString += jointWinner(carList, maxGo);
