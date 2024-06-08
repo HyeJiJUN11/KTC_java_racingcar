@@ -8,15 +8,7 @@ public class Application {
         //,구분한 이름 리스트
         String[] carNameList = input.nextLine().split(",");
         //car 객체 리스트
-        List<Car> carList = new ArrayList<>();
-        for (String name : carNameList) {
-            //이름이 5이상이면 오류 발생
-            if (name.length() > 5) {
-                throw new IllegalStateException("잘못된 입력입니다.");
-            }
-            //아니면 car 객체 생성후 넣음
-            carList.add(new Car(name));
-        }
+        List<Car> carList = MakeCarList(carNameList);
 
         //시도할 횟수 입력
         System.out.println("시도할 회수는 몇회인가요?");
@@ -31,7 +23,6 @@ public class Application {
             CarRaceTry(carList);
             //결과 프린트
             CarRacePrint(carList);
-            System.out.println();
         }
 
         //go 큰 순서로 정렬
@@ -41,6 +32,24 @@ public class Application {
         System.out.print("최종우승자 : " + carList.get(0).getName());
         //공동 우승자 있을 시
         jointWinner(carList, maxGo);
+    }
+ㅁ
+    /**
+     * 이름 리스트로 CarList 만듦
+     * @param carNameList 이름 리스트
+     * @return car객체 리스트
+     */
+    private static List<Car> MakeCarList(String[] carNameList) {
+        List<Car> carList = new ArrayList<>();
+        for (String name : carNameList) {
+            //이름이 5이상이면 오류 발생
+            if (name.length() > 5) {
+                throw new IllegalStateException("잘못된 입력입니다.");
+            }
+            //아니면 car 객체 생성후 넣음
+            carList.add(new Car(name));
+        }
+        return carList;
     }
 
     /**
@@ -66,21 +75,25 @@ public class Application {
     private static void CarRacePrint(List<Car> carList) {
         for(Car car : carList){
             System.out.print(car.getName() + " : ");
+            System.out.println(printGo(car));
             printGo(car);
             System.out.println();
         }
+        System.out.println();
     }
 
     /**
      * 이동한 거리 "-"로 출력
      * @param car
      */
-    private static void printGo(Car car) {
+    private static String printGo(Car car) {
+        String goString = "";
         if(car.getGo() == 0)
-            return;
+            return goString;
         for(int i=0; i<car.getGo(); i++){
-            System.out.print("-");
+            goString += "-"
         }
+        return goString;
     }
 
     /**
